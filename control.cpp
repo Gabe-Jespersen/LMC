@@ -30,59 +30,62 @@ vector<vector <int> > command(int input, int ACC, vector<int> mailBox, int runLo
 
     //don't need to check for invalid command #s, done in parse now
 
-    else
+    if(input < 100)
     {
-        if(input < 100)
-        {
-            if(input == 0)
-                hlt();   //not doing anything else, can't find what to do
-                         //if it is 0xx
-        }
-        
-        else if(input < 200)//add
-        {
-            ACC = add(ACC, input%100, mailBox);
-        }
-        else if(input < 300)//subtract
-        {
-            ACC = sub(ACC, input%100, mailBox);
-        }
-        else if(input < 400)//store in memory
-        {
-            mailBox = sta(ACC, input%100, mailBox);
-        }
-        else if(input < 600)//load from memory
-        {
-            if(input > 499)
-            {
-                ACC = lda(ACC, input%100, mailBox);
-            }
-            //no defined behavior for 4xx
-        }
-        else if(input < 700)//break
-        {
-            runLoc = bra(input%100);
-            runLocEdited = true;
-        }
-        else if(input < 800)//break if zero
-        {
-            runLoc = brz(ACC, input%100);
-            runLocEdited = true;
-        }
-        else if(input < 900)//break if positive
-        {
-            runLoc = brp(ACC, input%100);
-            runLocEdited = true;
-        }
-        else if(input == 901)//take input
-        {
-            ACC = inp();
-        }
-        else if(input == 902)//output accumulator
-        {
-            out(ACC);
-        }
+        if(input == 0)
+            hlt();   //not doing anything else, can't find what to do
+                     //if it is 0xx
     }
+    
+    else if(input < 200)//add
+    {
+        ACC = add(ACC, input%100, mailBox);
+    }
+    else if(input < 300)//subtract
+    {
+        ACC = sub(ACC, input%100, mailBox);
+    }
+    else if(input < 400)//store in memory
+    {
+        mailBox = sta(ACC, input%100, mailBox);
+    }
+    else if(input < 500)//non standard, sets the accumulator to a static #
+    {
+        ACC = aet(ACC, input%100);
+    }
+    else if(input < 600)//load from memory
+    {
+        if(input > 499)
+        {
+            ACC = lda(ACC, input%100, mailBox);
+        }
+        //no defined behavior for 4xx
+    }
+    else if(input < 700)//break
+    {
+        runLoc = bra(input%100);
+        runLocEdited = true;
+    }
+    else if(input < 800)//break if zero
+    {
+        runLoc = brz(ACC, input%100);
+        runLocEdited = true;
+    }
+    else if(input < 900)//break if positive
+    {
+        runLoc = brp(ACC, input%100);
+        runLocEdited = true;
+    }
+    else if(input == 901)//take input
+    {
+        ACC = inp();
+    }
+    else if(input == 902)//output accumulator
+    {
+        out(ACC);
+    }
+
+
     if(!runLocEdited)
     {
         runLoc++;//if there hasn't been a break

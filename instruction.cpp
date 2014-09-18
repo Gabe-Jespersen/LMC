@@ -38,6 +38,11 @@ vector<int> sta(int ACC, int saveLoc, vector<int> mailBox)//storing in memory
     return(mailBox);
 }
 
+int aet(int ACC, int input)
+{
+    return(input%100);
+}
+
 int lda(int ACC, int readLoc, vector<int> mailBox)//loading from memory
 {
     return(mailBox.at(readLoc));

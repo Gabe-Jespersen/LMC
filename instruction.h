@@ -23,6 +23,7 @@
 int add(int,int,std::vector<int>);
 int sub(int,int,std::vector<int>);
 std::vector<int> sta(int,int,std::vector<int>);
+int aet(int,int);
 int lda(int,int, std::vector<int>);
 int bra(int);
 int brz(int,int);
