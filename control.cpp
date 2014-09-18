@@ -24,13 +24,12 @@ using namespace std;
 
 vector<vector <int> > command(int input, int ACC, vector<int> mailBox, int runLoc)
 {
-    bool runLocEdited = false;
-    vector<vector <int> > toReturn;
-    if(input < 0||input > 999)
-    {
-        toReturn = {{runLoc+1},{ACC},mailBox};//+1 to go to next instruction
-        return(toReturn);
-    }
+    bool runLocEdited = false; //if it hasn't been edited, it will just return
+                               //current command #+1
+    vector<vector <int> > toReturn; //initializing values to return
+
+    //don't need to check for invalid command #s, done in parse now
+
     else
     {
         if(input < 100)
@@ -40,19 +39,19 @@ vector<vector <int> > command(int input, int ACC, vector<int> mailBox, int runLo
                          //if it is 0xx
         }
         
-        else if(input < 200)
+        else if(input < 200)//add
         {
             ACC = add(ACC, input%100, mailBox);
         }
-        else if(input < 300)
+        else if(input < 300)//subtract
         {
             ACC = sub(ACC, input%100, mailBox);
         }
-        else if(input < 400)
+        else if(input < 400)//store in memory
         {
             mailBox = sta(ACC, input%100, mailBox);
         }
-        else if(input < 600)
+        else if(input < 600)//load from memory
         {
             if(input > 499)
             {
@@ -60,33 +59,33 @@ vector<vector <int> > command(int input, int ACC, vector<int> mailBox, int runLo
             }
             //no defined behavior for 4xx
         }
-        else if(input < 700)
+        else if(input < 700)//break
         {
             runLoc = bra(input%100);
             runLocEdited = true;
         }
-        else if(input < 800)
+        else if(input < 800)//break if zero
         {
             runLoc = brz(ACC, input%100);
             runLocEdited = true;
         }
-        else if(input < 900)
+        else if(input < 900)//break if positive
         {
             runLoc = brp(ACC, input%100);
             runLocEdited = true;
         }
-        else if(input == 901)
+        else if(input == 901)//take input
         {
             ACC = inp();
         }
-        else if(input == 902)
+        else if(input == 902)//output accumulator
         {
             out(ACC);
         }
     }
     if(!runLocEdited)
     {
-        runLoc++;
+        runLoc++;//if there hasn't been a break
     }
     toReturn = {{runLoc},{ACC},mailBox};
     return(toReturn);

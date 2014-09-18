@@ -22,33 +22,33 @@
 
 using namespace std;
 
-int add(int ACC, int mailPos, vector<int> mailBox)
+int add(int ACC, int mailPos, vector<int> mailBox)//adding
 {
     return((ACC+mailBox.at(mailPos))%1000);
 }
 
-int sub(int ACC, int mailPos, vector<int> mailBox)
+int sub(int ACC, int mailPos, vector<int> mailBox)//subtracting
 {
     return((ACC-mailBox.at(mailPos))%1000);
 }
 
-vector<int> sta(int ACC, int saveLoc, vector<int> mailBox)
+vector<int> sta(int ACC, int saveLoc, vector<int> mailBox)//storing in memory
 {
     mailBox[saveLoc] = ACC;
     return(mailBox);
 }
 
-int lda(int ACC, int readLoc, vector<int> mailBox)
+int lda(int ACC, int readLoc, vector<int> mailBox)//loading from memory
 {
     return(mailBox.at(readLoc));
 }
 
-int bra(int runLoc)
+int bra(int runLoc)//break, go to different line than current+1
 {
     return(runLoc);
 }
 
-int brz(int ACC, int runLoc)
+int brz(int ACC, int runLoc)//break if accumulator is 0
 {
     if(ACC == 0)
     {
@@ -60,7 +60,7 @@ int brz(int ACC, int runLoc)
     }
 }
 
-int brp(int ACC, int runLoc)
+int brp(int ACC, int runLoc)//break if accumulator is greater than or equal to 0
 {
     if(ACC >= 0)
     {
@@ -72,21 +72,21 @@ int brp(int ACC, int runLoc)
     }
 }
 
-int inp()
+int inp()//take input, set to accumulator
 {
     int ACC = 0;
     cin >> ACC;
     return(ACC);
 }
 
-void out(int ACC)
+void out(int ACC)//output accumulator
 {
     cout << ACC << endl;
     return;
 }
 
-void hlt()
+void hlt()//halt, ran if 000 is given
 {
-    exit(1);
+    exit(2);
     return;;
 }

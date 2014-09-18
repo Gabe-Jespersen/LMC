@@ -39,9 +39,9 @@ vector<int> toRunParse(int argc, char **argv)
     {
         for(int i = 1; i < argc; i++)//starting at 1, argv[0] will just be ./LMC
         {
-            if(!strcmp(argv[i],"-f") && argc > i)
+            if(!strcmp(argv[i],"-f") && argc > i)//file flag
             {
-                ifstream file(argv[i+1], ios::in | ios::binary);
+                ifstream file(argv[i+1], ios::in | ios::binary);//initialize file
                 if(file)
                 {
                     string toReturn;
@@ -51,6 +51,7 @@ vector<int> toRunParse(int argc, char **argv)
                     file.read(&toReturn[0], toReturn.size());
                     file.close();
 
+                    //setting a string vector to the file
                     stringstream stream(toReturn);
                     vector<string> lines;
                     while(true)
@@ -62,13 +63,14 @@ vector<int> toRunParse(int argc, char **argv)
                         lines.push_back(line);
                     }
 
+                    //setting toRun by each input in the file, read via atoi
                     vector<int> instructions;
                     for(int i = 0; i < lines.size(); i++)
                     {
                         instructions.push_back(atoi(lines.at(i).c_str()));
                     }
 
-                    for(int i = 0; i < instructions.size(); i++)
+                    for(int i = 0; i < instructions.size(); i++)//checking for invalid commands
                     {
                         if((instructions.at(i) < 100 && !(instructions.at(i) == 0)) || instructions.at(i) > 999)
                         {
@@ -86,6 +88,7 @@ vector<int> toRunParse(int argc, char **argv)
                 }
             }
             else if((!strcmp(argv[i],"-s")||!strcmp(argv[i],"-l")) && argc > i)
+            //if string flag was given, read all of the inputs after and set to toRun
             {
                 vector<int> instructions;
                 for(int j = 1; j < (argc-i); j++)
@@ -118,18 +121,19 @@ vector<int> toRunParse(int argc, char **argv)
 vector<int> flagsParse(int argc, char **argv)
 {
     //defaults
-    int debug = 0;
+    int debug = 0;//no debug
     //defaults
 
 
     for(int i = 1; i < argc; i++)//start at 1 because 1st flag is ./LMC
     {
-        if(!strcmp(argv[i],"-d"))
+        if(!strcmp(argv[i],"-d"))//if debug flag was given
         {
-            debug = 1;
+            debug = 1;//set to debug
         }
     }
-    vector<int> toReturn = {debug};
+
+    vector<int> toReturn = {debug};//nothing else right now
     return(toReturn);
 }
 

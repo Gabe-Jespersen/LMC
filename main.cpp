@@ -28,8 +28,8 @@ int main(int argc, char **argv)
     vector<int> settings;
     vector<vector <int> > curState;
 
-    toRun    = toRunParse(argc,argv); 
-    settings = flagsParse(argc,argv);
+    toRun    = toRunParse(argc,argv); //setting the array of commands to run  
+    settings = flagsParse(argc,argv); //getting settings, currently only debug
         //reading flag settings
         int printVariables = settings.at(0);
 
@@ -48,10 +48,11 @@ int main(int argc, char **argv)
                                                //why this is done, see: main.cpp:37
 
 
-    while(curState.at(0).at(0) < toRun.size())
+    while(curState.at(0).at(0) < toRun.size())//while there is commands
     {
-        if(printVariables != 0)
+        if(printVariables != 0) //if -d was given
         {
+            //prints current instructions, line #, and all memory
             cout << curState.at(0).at(0) << ',' << curState.at(1).at(0) << ',' << toRun.at(curState.at(0).at(0)) << endl;
             for(int i = 0; i < 9; i++)
             {
@@ -62,6 +63,7 @@ int main(int argc, char **argv)
                 cout << endl;
             }
         }
+        //runs the next command
         curState = command(toRun.at(curState.at(0).at(0)),curState.at(1).at(0),curState.at(2),curState.at(0).at(0));
     }
     return 1;
